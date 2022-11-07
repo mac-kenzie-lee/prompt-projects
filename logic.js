@@ -16,6 +16,31 @@ clearButton.addEventListener('dblclick', masterClear)
 for (let btn of numberButtonsArray) {
     btn.addEventListener('click', updateDisplay)
 }
+
+document.addEventListener('keypress', yell)
+
+const numberKeys = ['1','2','3','4','5','6','7','8','9','0','.']
+const deleteKeys = ["c", "e", "Backspace", "delete"]
+const operatorKeys = ["*","-","+","/"]
+const equalKeys = []
+
+function yell (e) {
+
+    if (numberKeys.indexOf(e.key) !== -1) {
+        updateKeyDisplay(e)
+    }
+    if (deleteKeys.indexOf(e.key) !== -1) {
+        clearDisplay()
+    } 
+
+    for (let o of operatorKeys) {
+        if (e.key === o) {
+            console.log(o + 'd')
+            saveKeyOperatorVariable(e)
+        }
+    }
+
+}
 turnOnTheOperators()
 
 calculator.defaultDisplay = true;
@@ -48,6 +73,29 @@ function updateDeci(e){
     }
 
 }
+
+function saveKeyOperatorVariable(e) {
+    calculator.operator = e.key;
+    console.log(calculator.num1)
+    if (calculator.num1 === undefined) {
+        calculator.num1 = Number(screenDisplay.textContent)
+    } console.log(calculator.num1)
+//    clearDisplay()
+}
+
+
+function updateKeyDisplay(e) {
+    calculator.defaultDisplay = false;
+
+    if (calculator.toDisplay.length > 15) {
+        return null;
+    } else {
+    calculator.toDisplay += e.key;
+    screenDisplay.textContent = calculator.toDisplay
+    calculator.currentDisplay = Number(calculator.toDisplay)
+}}
+
+
 
 function updateDisplay(e) {
     

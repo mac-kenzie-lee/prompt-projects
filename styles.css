@@ -57,6 +57,10 @@
     align-self: flex-start;
     padding-bottom: 1rem;
     width: 100%;
+    font-family: 'Blinker', sans-serif;
+    text-shadow: 1px 3px 3px black;
+    letter-spacing: 0.15ch;
+    font-size: 1.3rem;
     border-bottom: solid 1px silver;
 }
 

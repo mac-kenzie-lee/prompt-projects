@@ -8,7 +8,7 @@ body {
 }
 
 .title {
-    padding: 1rem;
+    padding: 0.2rem;
     margin-top: 0;
     margin-bottom: 3rem;
     width: 100%;
@@ -16,6 +16,29 @@ body {
     font-family: sans-serif;
     color: white;
     background-color: rgb(46, 68, 64);
+    display: flex;
+    justify-content: space-around;
+}
+.title h1 {
+    width: 30%;
+}
+
+.title ul {
+    width: 70%;
+    display: flex;
+    list-style: none;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+    padding-right: 1rem;
+}
+
+.title ul li a {
+    gap: 10rem;
+}
+
+.title ul li a {
+    color: white;
 }
 
 .calculator-metal-edges {

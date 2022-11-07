@@ -2,8 +2,6 @@
 
 const calculator = {};
 
-
-
 calculator.divide = (x,y)=> {
     return x / y;
 },
@@ -92,14 +90,27 @@ function callAnOperator(e) {
     calculator.currentOperator = e.target.parentElement.children[0].innerText;
     if (calculator.defaultDisplay === false) {
         //only proceeds if the user inputted a number
+        if (calculator.expression.length === 0) {
+        calculator.firstNumber = Number(calculator.toDisplay);
+        calculator.nextOperator = calculator.currentOperator
+        calculator.expression.push(Number(calculator.toDisplay));
+        calculator.nextOperator = calculator.currentOperator;
+    }
         
-        calculator.expression.push({[calculator.currentOperator]:Number(calculator.toDisplay)});
+     
+        else {
+            console.log('erm')
+            calculator.expression.push({[calculator.nextOperator]:Number(calculator.toDisplay)});         
+            calculator.nextOperator = calculator.currentOperator;
+        }
+
         clearDisplay()
     }
  
 
 }
 function equate(e) {
+    let solution;
     console.log('em')
     function evaluateIt(key, value, accumulator){
         if (key === "×") {
@@ -118,58 +129,50 @@ function equate(e) {
     }
 
 
-
+    console.log('taco')
     if (calculator.usedAnOperator === true && calculator.defaultDisplay === false) {
         //checks if an operator was used once, and if another number was clicked
         let run = 0;
-        let lastExpression = (Number(screenDisplay.textContent))
-        calculator.expression.forEach((e,i,arr) => {
+        calculator.lastExpression = (Number(screenDisplay.textContent))
+        for (let element = 0; element < calculator.expression.length; element) {
+        console.log(`element: ${element}`)
+       
+       
+       
+       
+       
             //get's the operator string
-            let key = Object.keys(e)[0]
-            let value = calculator.expression[0][key]
-            if (calculator.run === undefined) {
+      //      let key = Object.keys(obj)[0]
+        //    let value = calculator.expression[0][key]
+         //   console.log(`key: ${key} value : ${value}`)
+         //   console.log(`obj: ${obj[key]} calculator.expression[0]['firstNumber']:${calculator.expression[0]['firstNumber']}`)
+         //   if (obj[key] === calculator.expression[0]['firstNumber']) {
                 //first run
-                calculator.run = true;
-                calculator.accumulator = value;
-                console.log('firstrun')
-                run = 1;
-                console.log(run)
-            } else {
-                    run++;
-                    console.log(`${run}th run`)
-                     //not first loop iteration
-                    if (value !== undefined) {
-                    //this checks to make sure it's not the last value 
-
-                    //this gives an accumulator for the expression
+           //     calculator.accumulator = value;
+            //    console.log(`Initial int: ${calculator.accumulator}`)
+            //    run = 1;
+            //    console.log(`firstrun: run:${run}`)
+                
+           // } else {
+             //       run++;
+               //     console.log(`${run}th run`)
                     console.log(calculator.accumulator)
-                    console.log('g')
-                    calculator.acc = evaluateIt(key, value, calculator.acc)
-            
-                    }
+                //    console.log('g')
+                 //   calculator.accumulator = evaluateIt(key, value, calculator.accumulator)
+                 //   console.log(accumulator)
                     
-                    else if (value === undefined) {
-                    //this means it's the last expression
-                    calculator.acc = evaluateIt(calculator.currentOperator, lastExpression, calculator.acc)
-                    }
-        }})
+                    
+        }}
     
-        let expressionToReturn = calculator.acc;
-        delete calculator.acc;
-        console.log()
-        console.log(expressionToReturn)
-        return expressionToReturn;
+        console.log(calculator.accumulator)
+        
+        
         //console.log(lastExpression)
     
     }
-}
+//}
 
 //1+2-3+8 //4 not working
-
-
-
-
-
 
 
 

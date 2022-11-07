@@ -42,7 +42,7 @@ clearButton.addEventListener('click', clearDisplay)
 
 
 clearButton.addEventListener('dblclick', masterClear) 
-equalButton.addEventListener('click', equate)
+equalButton.addEventListener('click', equateAndShow)
 
 calculator.defaultDisplay = true;
 
@@ -68,6 +68,12 @@ function updateDisplay(e) {
     screenDisplay.textContent = calculator.toDisplay;
 }
 
+function equateAndShow(e){
+    calculator.toDisplay += e.target.parentElement.children[0].innerText;
+    screenDisplay.textContent = equate(e)
+
+}
+
 calculator.expression = [];
 
 //sets the display to be 0.
@@ -82,6 +88,7 @@ function masterClear() {
     console.log('all clear?')
     console.log(calculator.expression)
     calculator.expression = [];
+    screenDisplay.textContent = 'memory cleared'
 }
 calculator.usedAnOperator = false;
 
@@ -134,45 +141,25 @@ function equate(e) {
         //checks if an operator was used once, and if another number was clicked
         let run = 0;
         calculator.lastExpression = (Number(screenDisplay.textContent))
-        for (let element = 0; element < calculator.expression.length; element) {
-        console.log(`element: ${element}`)
-       
-       
-       
-       
-       
-            //get's the operator string
-      //      let key = Object.keys(obj)[0]
-        //    let value = calculator.expression[0][key]
-         //   console.log(`key: ${key} value : ${value}`)
-         //   console.log(`obj: ${obj[key]} calculator.expression[0]['firstNumber']:${calculator.expression[0]['firstNumber']}`)
-         //   if (obj[key] === calculator.expression[0]['firstNumber']) {
-                //first run
-           //     calculator.accumulator = value;
-            //    console.log(`Initial int: ${calculator.accumulator}`)
-            //    run = 1;
-            //    console.log(`firstrun: run:${run}`)
+        let sum = null;
+        for (let element = 0; element < calculator.expression.length; element++) {
+            //first run
+            if (element === 0) {
+                //do the calculation setup for the first number.
+                sum = calculator.expression[element]
                 
-           // } else {
-             //       run++;
-               //     console.log(`${run}th run`)
-                    console.log(calculator.accumulator)
-                //    console.log('g')
-                 //   calculator.accumulator = evaluateIt(key, value, calculator.accumulator)
-                 //   console.log(accumulator)
-                    
-                    
-        }}
+            } else {
+                //not the first iteration
+                //loop just once
+                for (let key in (calculator.expression[element])) {
+                    let value = calculator.expression[element][key]
+                    sum = evaluateIt(key, value, sum)
+                }
+            }
+
+            sum = evaluateIt(calculator.currentOperator, calculator.lastExpression,sum)
+            
+            return sum;
+        }
     
-        console.log(calculator.accumulator)
-        
-        
-        //console.log(lastExpression)
-    
-    }
-//}
-
-//1+2-3+8 //4 not working
-
-
-
+    }}

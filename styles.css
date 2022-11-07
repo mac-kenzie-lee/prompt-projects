@@ -1,7 +1,22 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+
 * {
     box-sizing: border-box;
 }
 
+.title {
+    padding: 1rem;
+    margin-top: 0;
+    margin-bottom: 3rem;
+    width: 100%;
+    text-align: center;
+    font-family: sans-serif;
+    color: white;
+    background-color: rgb(46, 68, 64);
+}
 
 .calculator-metal-edges {
     border: 1px solid black;

@@ -3,22 +3,34 @@
 }
 
 
-
-.calculator-body {
-    
+.calculator-metal-edges {
+    border: 1px solid black;
+   
+   
     /*size and placement of calculator*/
+    background: conic-gradient(rgb(199, 199, 199), rgb(140, 140, 140), rgb(60, 60, 60), rgb(149, 149, 149), rgb(203, 203, 203));
+
+    width: 365px; /*adjusts the body of calc needs to be refactored for responsive*/
     margin-left: auto;
     margin-right: auto;
-    width: 400px; /*adjusts the body of calc needs to be refactored for responsive*/
+
+}
+
+
+.calculator-body {
     height: 600px; /*adjusts the body of calc needs to be refactored for responsive*/
+    width: 350px; /*adjusts the body of calc needs to be refactored for responsive*/
+    margin-left: auto;
+    margin-right: auto;
     
+ 
     /*styling*/
-    background: rgb(74, 47, 45);
-    padding: 1rem 0;
-    border-left: 6px solid silver;
-    border-right: 6px solid silver;
+    background: linear-gradient(70deg, rgb(74, 45, 70), rgb(74, 47, 45));
+    padding: 1rem 0 0 0;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
     border-top: 5px solid black; 
-    border-bottom: 1px solid cadetblue;
+    border-bottom: 2px solid rgb(101, 106, 107);
 
 
     /*children positioning*/
@@ -49,31 +61,33 @@
 }
 
 .calculator-screen {
-    border-top: 14px solid rgb(78, 42, 36);
-    border-bottom: 6px solid rgb(78, 42, 36);
+    border-top: 14px solid rgb(68, 37, 53);
+    border-bottom: 7.5px solid rgb(78, 42, 36);
     width: 100%;
     height: 4.5rem;
     text-align: center;
     display: flex; 
     justify-content: flex-end;
     align-items: center;
-    background-color: rgb(10, 1, 15);
+    background: linear-gradient(rgb(24, 4, 11),rgb(24, 4, 11),rgb(44, 5, 24),rgb(35, 9, 18), rgb(24, 4, 11));
 }
 
 .calculator-screen-text {
-    color: rgb(182, 0, 70);
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    color: rgb(255, 63, 137);
     text-transform: uppercase;
     text-align: right;
     justify-self: flex-end;
-    padding-right: 0.75rem;
-    padding-top: 0.2rem; 
-    font-size: 2rem;   
+    padding-right: 3.75rem;
+    padding-top: 0.5rem; 
+    font-size: 1rem;  
+    text-shadow: 3px -1px 9px rgba(255, 177, 220, 0.774); 
 }
 
 .calc-bottom {
     width: 100%;
     height: 70%;
-    background: rgb(208, 192, 154);
+    background: linear-gradient(306deg, rgb(208, 192, 154),  rgb(224, 216, 173), rgb(213, 201, 171) 70.71%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -108,6 +122,7 @@
     width: 25%;
     align-items: center;
     flex-direction: column;
+    
 }
 
 
@@ -169,11 +184,24 @@
     font-stretch: ultra-expanded;
     font-size: 1.4rem;
     text-align: center;
-    color: black
+    color: black;
+    padding: 0;
+    margin: 0;
+    line-height: 1.9ch;
+    
+    
 }
 
+/*just ce text*/
 .button-row:nth-child(5) .cal-button-container:nth-of-type(1) .button-text{
-font-weight: 300;
+     font-family: 'Orbitron', sans-serif;
+     font-weight: 900;
+     letter-spacing: 0.1ch;
+     font-stretch: ultra-expanded;
+     line-height: 1.85ch;
+     font-size: 1.2rem;
+    
+    
 
 }
 

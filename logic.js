@@ -1,8 +1,3 @@
-
-
-const calculator = {};
-
-
 //Selectors------------------------------------------------
 const equalButton = document.querySelector("#equal")
 const screenDisplay = document.querySelector(".calculator-screen-text");
@@ -10,128 +5,162 @@ const numberButtonsArray = document.querySelectorAll(".number");
 const clearButton =  document.querySelector("#clear")
 const operatorButtonArray = document.querySelectorAll(".operator");
 const deci = document.querySelector('#decimal')
+const per = document.querySelector('#per')
+
+
+//---------------variables
+const numberKeys = ['1','2','3','4','5','6','7','8','9','0','.']
+const deleteKeys = ["c", "e"]
+const backspaceKeys = ["Backspace", "delete"]
+const operatorKeys = ["*","-","+","/"]
+const equalKeys = ['=']
+
+//Object starting properties
+const calculator = {};
+calculator.defaultDisplay = true;
+calculator.toDisplay = "";
+
+
 //event listeners ----------------------------------------------------
 clearButton.addEventListener('click', clearDisplay) 
 clearButton.addEventListener('dblclick', masterClear) 
 for (let btn of numberButtonsArray) {
     btn.addEventListener('click', updateDisplay)
 }
+document.addEventListener('keydown', keyboardEventHandler)
+equalButton.addEventListener('click', findSolution)
 
-document.addEventListener('keypress', yell)
 
-const numberKeys = ['1','2','3','4','5','6','7','8','9','0','.']
-const deleteKeys = ["c", "e", "Backspace", "delete"]
-const operatorKeys = ["*","-","+","/"]
-const equalKeys = []
-
-function yell (e) {
-
-    if (numberKeys.indexOf(e.key) !== -1) {
-        updateKeyDisplay(e)
-    }
-    if (deleteKeys.indexOf(e.key) !== -1) {
-        clearDisplay()
-    } 
-
-    for (let o of operatorKeys) {
-        if (e.key === o) {
-            console.log(o + 'd')
-            saveKeyOperatorVariable(e)
-        }
-    }
-
-}
-turnOnTheOperators()
-
-calculator.defaultDisplay = true;
-calculator.toDisplay = "";
-refreshDeci()
-
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //functions ---------------------------------------------------------
-function turnOnTheOperators() {   
-for (let op of operatorButtonArray) {
-    op.addEventListener('click', saveOperatorVariable)
- }
-}
-function turnOffTheOperators() {
+
+//Adding and removing event listeners------------------------
+function enableOperatorButtons() {   
+//Adds event listener to the *./,-,+ buttons
     for (let op of operatorButtonArray) {
-        op.removeEventListener('click', saveOperatorVariable)
-    }
+        op.addEventListener('click', saveOperatorToMemory)
+     }
 }
 
-function refreshDeci() {
-    deci.addEventListener('click', updateDeci)
+function disableOperatorButtons() {
+//removes functionality of +.- / * buttons
+    for (let op of operatorButtonArray) {
+        op.removeEventListener('click', saveOperatorToMemory)
+    }
+}
+    
+
+function enableDecimalButton() {
+    //adds an event listener to the decimal key
+    deci.addEventListener('click', disableDecimalButton)
     calculator.deciUsed = false;
 }
 
-function updateDeci(e){
-    
+
+function disableDecimalButton(e){
+    //checks to see if the decimal was used, and removes the ability to use twice
     if (calculator.deciUsed === false) {
         calculator.deciUsed = true;
         updateDisplay(e)
-        deci.removeEventListener('click', updateDeci)
+        deci.removeEventListener('click', disableDecimalButton)
     }
 
+}
+
+//Keyboard functions--------------------------------------
+
+function keyboardEventHandler(e) {
+    if (numberKeys.indexOf(e.key) !== -1) {
+        updateDisplay(e)
+    }
+    if (deleteKeys.indexOf(e.key) !== -1) {
+        masterClear()
+    } 
+    if (backspaceKeys.indexOf(e.key) !== -1) {
+        clearDisplay()
+    } 
+    
+
+    for (let o of operatorKeys) {
+        if (e.key === o) {
+            saveOperatorToMemory(e)
+        }
+    }
+    for (let h of equalKeys) {
+        if (e.key === h) {
+            console.log(e.key)
+            findSolution()
+        }
+    }
 }
 
 function saveKeyOperatorVariable(e) {
     calculator.operator = e.key;
-    console.log(calculator.num1)
     if (calculator.num1 === undefined) {
         calculator.num1 = Number(screenDisplay.textContent)
-    } console.log(calculator.num1)
-//    clearDisplay()
+    } 
 }
 
 
-function updateKeyDisplay(e) {
-    calculator.defaultDisplay = false;
+//---functions for updating the calculator screen.
 
+function updateDisplay(e) {
+    //checks to make sure a user typed or clicked something on the calculator
+    calculator.defaultDisplay = false;
     if (calculator.toDisplay.length > 15) {
         return null;
     } else {
-    calculator.toDisplay += e.key;
-    screenDisplay.textContent = calculator.toDisplay
-    calculator.currentDisplay = Number(calculator.toDisplay)
-}}
-
-
-
-function updateDisplay(e) {
-    
-    calculator.defaultDisplay = false;
-    if (calculator.toDisplay.length > 15) {
-        return null;
-    }
     //isolates the button and figures out what it represents in strng
-    //console.dir(e.target.parentElement.children[0].innerText)
-    calculator.toDisplay += e.target.parentElement.children[0].innerText;
+    if(e.type === 'click') {
+        //checks if the event was a click event, and finds the value the button represents and adds to display
+        calculator.toDisplay += e.target.parentElement.children[0].innerText;
+        
+    } else if (e.type === 'keydown') {
+        //checks if event was a keydown event and adds the number from the key to the display
+        //This is a string
+        calculator.toDisplay += e.key; 
+    }
+    //Updates the screen to be the text the user inputted
     screenDisplay.textContent = calculator.toDisplay;
-    calculator.currentDisplay = Number(calculator.toDisplay)
+
+    //Updates the variable holding the current calculator value as a number 
+    //This is a number
+    calculator.currentNumberValueOnCalculatorScreen = Number(calculator.toDisplay)
+    }
 }
+
+
 //sets the display to be 0.
 function clearDisplay() {
+    //Resets the logic check to be default state of calculator screen
     calculator.defaultDisplay = true;
+    //Makes the screen have the '0.' default blank state
     screenDisplay.textContent = "0.";
+    
+    //Resets our number variable which gets converted to our saved number later
     calculator.toDisplay = ""
-    console.clear()
-    turnOnTheOperators()
-    refreshDeci()
+    
+    //Turns on the operator buttons and the decimal
+    enableOperatorButtons()
+    enableDecimalButton()
 }
 
 function masterClear() {
     // delete calculator.expression
-     delete calculator.num1;
-     delete calculator.num2;
-     delete calculator.operator
-     delete calculator.summation
-     console.clear()
-    refreshDeci()
-     //   console.log(calculator.expression)
-  //   calculator.expression = [];
-     screenDisplay.textContent = 'memory cleared'
+    //clear's residual data
+    delete calculator.summation;
+    delete calculator.num1;
+    delete calculator.num2;
+    delete calculator.operator;
+    console.clear()
+    enableDecimalButton()
+    enableOperatorButtons()
+    //displays a message on the screen 
+    screenDisplay.textContent = 'memory cleared'
  }
 
+
+//Calculation functions in variables--------------
 const add = (n, n2) => n + n2
 const subtract = (n, n2) => n - n2
 const divide = (n, n2) => {
@@ -140,60 +169,71 @@ const divide = (n, n2) => {
     }
     return n / n2}
 const multiply = (n, n2) => n * n2
-
 const operate = (op, num1, num2) => {
     let sum = null;
     if (op ==='+') {
         sum = add(num1, num2)    
     }
-     else if (op === '−'){
+    else if (op === '−'){
             sum = subtract(num1, num2)
-     }
-      else if (op === '×') {
+    }
+    else if (op === '×' || op === '*'){
             sum = multiply(num1, num2)
-       }
-        else if (op === '÷') {
+    }
+    else if (op === '÷' || op === "/"){
             sum = divide(num1, num2)
-         }
-          console.log(sum)
-        return sum;
+    }
+    console.log(`SUM from operate(): ${sum}`)
+    return sum;
     }
 
-    const per = document.querySelector('#per')
-function saveOperatorVariable(e) {
-    calculator.operator = e.target.parentElement.children[0].innerText;
+
+function saveOperatorToMemory(e) {
+    
+    if(e.type === 'click') {
+        calculator.operator = e.target.parentElement.children[0].innerText;
+        console.log('saved click')
+    } else if (e.type === 'keydown') {
+        calculator.operator = e.key; 
+    }
+    
+    
     if (calculator.num1 === undefined) {
         calculator.num1 = Number(screenDisplay.textContent)
-    } 
+    }
+
     clearDisplay();
     per.addEventListener('click', getThePercent)
     //removes other operator event listeners..
-    turnOffTheOperators()
+    disableOperatorButtons()
 
 
 }
 
 
-equalButton.addEventListener('click', findSolution)
-
 
 function findSolution() {
+    console.log(calculator.defaultDisplay)
     //gets the sum after pressing equal sign
     if (calculator.defaultDisplay === false) {
-        calculator.num2 = calculator.currentDisplay
+        calculator.num2 = calculator.currentNumberValueOnCalculatorScreen
+      
         calculator.summation = operate(calculator.operator, calculator.num1, calculator.num2)
-        screenDisplay.textContent = calculator.summation;    
-        turnOnTheOperators()
+        
+        screenDisplay.textContent = String(calculator.summation);    
+        
+        enableOperatorButtons()
+        console.log(calculator.summation)
         calculator.num1 = calculator.summation    
         delete calculator.num2
-    }
+    } 
     
 }
 
 function getThePercent(){
     if (calculator.operator !== undefined && calculator.num1 !== undefined && calculator.defaultDisplay === false) {
         
-        calculator.num2 = calculator.currentDisplay;
+        calculator.num2 = calculator.currentNumberValueOnCalculatorScreen;
         if (calculator.operator === "+" || calculator.operator === "-") {
             calculator.num2 = ((calculator.num1) * calculator.num2/100);
         } else {
@@ -205,3 +245,8 @@ function getThePercent(){
 
     }
 } 
+
+
+//***Running code */
+enableOperatorButtons()
+enableDecimalButton()

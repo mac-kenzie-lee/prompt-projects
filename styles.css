@@ -2,8 +2,10 @@
 html {
     font-size: 1em;
 }
-
 body {
+    min-width: 0;
+    overflow-wrap: break-word;
+
     padding: 0;  
         display: flex;
         flex-direction: column;
@@ -14,6 +16,7 @@ body {
     background-image: url('https://images.unsplash.com/photo-1620812097331-ff636155488f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80');
     display: block;
     background-size:cover;
+    background-repeat: repeat;
     background-color: #597578;
     margin: 0;  
 }
@@ -298,7 +301,7 @@ color:white;
 {
     background-color: rgb(100, 35, 17);
 }
-@media (max-width: 500px) {
+@media (max-width: 570px) {
     body {
         display: flex;
         flex-direction: column;
@@ -346,5 +349,26 @@ color:white;
     color:white;
     }
     
-    
-  }
+.calculator-metal-edges {
+    border: 1px solid black;
+ 
+    /*size and placement of calculator*/
+    background: conic-gradient(rgb(199, 199, 199), rgb(140, 140, 140), rgb(60, 60, 60), rgb(149, 149, 149), rgb(203, 203, 203));
+
+    width: 310px;}
+
+    .calculator-body {
+        
+        height: 600px; /*adjusts the body of calc needs to be refactored for responsive*/
+        width: 300px; /*adjusts the body of calc needs to be refactored for responsive*/
+    }
+    main {display:flex;
+        height: 100vh;
+    justify-content: center;
+flex-direction: column;}
+
+.title {padding: 0;
+margin: 0;}
+
+
+}

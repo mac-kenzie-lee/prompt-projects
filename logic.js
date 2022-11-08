@@ -88,7 +88,6 @@ function keyboardEventHandler(e) {
     }
     for (let h of equalKeys) {
         if (e.key === h) {
-            console.log(e.key)
             findSolution()
         }
     }
@@ -174,7 +173,7 @@ const operate = (op, num1, num2) => {
     if (op ==='+') {
         sum = add(num1, num2)    
     }
-    else if (op === '−'){
+    else if (op === '-' || op === '−'){
             sum = subtract(num1, num2)
     }
     else if (op === '×' || op === '*'){
@@ -183,7 +182,6 @@ const operate = (op, num1, num2) => {
     else if (op === '÷' || op === "/"){
             sum = divide(num1, num2)
     }
-    console.log(`SUM from operate(): ${sum}`)
     return sum;
     }
 
@@ -192,12 +190,11 @@ function saveOperatorToMemory(e) {
     
     if(e.type === 'click') {
         calculator.operator = e.target.parentElement.children[0].innerText;
-        console.log('saved click')
     } else if (e.type === 'keydown') {
         calculator.operator = e.key; 
     }
-    
-    
+  
+
     if (calculator.num1 === undefined) {
         calculator.num1 = Number(screenDisplay.textContent)
     }
@@ -213,17 +210,13 @@ function saveOperatorToMemory(e) {
 
 
 function findSolution() {
-    console.log(calculator.defaultDisplay)
     //gets the sum after pressing equal sign
     if (calculator.defaultDisplay === false) {
         calculator.num2 = calculator.currentNumberValueOnCalculatorScreen
-      
+        calculator.was1 = calculator.num1
         calculator.summation = operate(calculator.operator, calculator.num1, calculator.num2)
-        
         screenDisplay.textContent = String(calculator.summation);    
-        
         enableOperatorButtons()
-        console.log(calculator.summation)
         calculator.num1 = calculator.summation    
         delete calculator.num2
     } 

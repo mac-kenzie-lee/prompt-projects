@@ -91,6 +91,9 @@ function keyboardEventHandler(e) {
             findSolution()
         }
     }
+    if (e.key === "%") {
+        getThePercent()
+    }
 }
 
 function saveKeyOperatorVariable(e) {

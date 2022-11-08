@@ -8,7 +8,33 @@ It can do simple calculations, and the design is based on a vintage Rockwell Cal
 <a href="http://fakewell.mackenziedev.com/">Click here to see the live Site</a>
 
 </p>
+The calculator is simple to use, it can be used by either clicking the buttons on the calculator, or pressing different buttons on your keyboard.
 
+#### The CE/C button
+  If clicked once, just clears the screen and current number variable -- You will see the default '0.' on the screen after clicking once
+  If clicked twice, it clears the memory for past variables, and resets the calculator fully, you will see "Memory cleared" displayed on the screen.
+  You can also access ce by pressing: "c" or "e" on your keyboard, you can access c by pressing the backspace button.
+  
+#### Numbers
+  You can click any of the digit buttons to add a number to the calculator, or press down on a key ranging from 1-0 on your keyboard.
+  
+#### Decimal
+  You can click the '.' for the decimal sign. It can only be used once in a number, and can also be accessed by pressing "." on your keyboard.
+  
+#### Math Operators
+  After at least one number is on the screen, you can click on a math operator: */+- to do calculations.
+  You can use keyboard keys: "*" "/" "-" and "+" respectively
+
+#### Percentage Operator
+  This can be accessed by clicking on the "%" button or using the "%" key on your keyboard
+  If you want to use the percentage operator, please note it's not a modulus operation, it finds the percentage of something and operates it on a prior number.
+  For example you can use it to find what's 25% of a number and add it to the number.
+  You can use it like so: Input to calculator: 50, Next: click "+", next write the percent value 25, next click the "%" button, and select the "=" sign
+  
+#### Equals Sign
+  After selecting one operator, and another number you must click the equals sign before you can do more math. You can access it by clicking "=" or pressing "=" on your keyboard.
+ 
+ 
 ## The Design: 
 The UI for this project was inspired by a Rockwell calculator on view at the Computer History Museum in Mountain View, CA. 
 Using the following photos for inspiration, the web design was created using CSS, and utilized flexbox and box model properties.

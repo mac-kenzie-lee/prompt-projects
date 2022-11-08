@@ -1,6 +1,10 @@
 body {
     padding: 0;
     margin: 0;
+    background-image: url('https://images.unsplash.com/photo-1620812097331-ff636155488f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80');
+    background-repeat: no-repeat;
+    background-position:center;
+    background-size: cover;
 }
 
 * {
@@ -13,18 +17,20 @@ body {
     margin-bottom: 3rem;
     width: 100%;
     text-align: center;
-    font-family: sans-serif;
+    font-family: 'Lexend', sans-serif;
     color: white;
     background-color: rgb(46, 68, 64);
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 .title h1 {
-    width: 30%;
+    font-weight: 800;
+    letter-spacing: 0.08ch;
+    align-self: baseline;
+    padding-left: 1rem;
 }
 
 .title ul {
-    width: 70%;
     display: flex;
     list-style: none;
     justify-content: flex-end;
@@ -34,12 +40,20 @@ body {
 }
 
 .title ul li a {
+    font-weight: 100;
     gap: 10rem;
+    text-decoration-line: underline;
+    text-underline-position: below;
+    text-underline-offset: 0.5rem;
 }
 
 .title ul li a {
-    color: white;
+    color: rgb(169, 224, 215);
 }
+.title ul li a:hover {
+color:white;
+}
+
 
 .calculator-metal-edges {
     border: 1px solid black;
@@ -51,6 +65,7 @@ body {
     width: 365px; /*adjusts the body of calc needs to be refactored for responsive*/
     margin-left: auto;
     margin-right: auto;
+    box-shadow: 0px 12px 40px black;
 
 }
 

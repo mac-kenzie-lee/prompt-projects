@@ -2,7 +2,10 @@
 
 
 body {
-    padding: 0;
+    padding: 0;  
+        display: flex;
+        flex-direction: column;
+    
     
     width: 100%;
     height: 100%;
@@ -35,9 +38,11 @@ body {
     letter-spacing: 0.08ch;
     align-self: baseline;
     padding-left: 1rem;
+    width: 40%;
 }
 
 .title ul {
+    width: 100%;
     display: flex;
     list-style: none;
     justify-content: flex-end;
@@ -291,3 +296,53 @@ color:white;
 {
     background-color: rgb(100, 35, 17);
 }
+@media (max-width: 500px) {
+    body {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .title {
+        padding: 0.1rem;
+        margin-top: 0;
+        margin-bottom: 1rem;
+        max-width: 100%;
+        text-align: center;
+        font-family: 'Lexend', sans-serif;
+        color: white;
+        background-color: rgb(46, 68, 64);
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .title h1 {
+        
+        font-size: 1.2rem;
+        
+    }
+    
+    .title ul {
+        flex-direction: column;
+        gap: .61rem;
+        width: 100%;
+        
+    }
+    
+    .title ul li a {
+        font-size: 0.8rem;
+        font-weight: 100;
+        
+        text-decoration-line: underline;
+        text-underline-position: below;
+        text-underline-offset: 0.5rem;
+    }
+    
+    .title ul li a {
+        color: rgb(169, 224, 215);
+    }
+    .title ul li a:hover {
+    color:white;
+    }
+    
+    
+  }

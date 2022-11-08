@@ -70,6 +70,7 @@ function disableDecimalButton(e){
 //Keyboard functions--------------------------------------
 
 function keyboardEventHandler(e) {
+    e.preventDefault()
     if (numberKeys.indexOf(e.key) !== -1) {
         updateDisplay(e)
     }

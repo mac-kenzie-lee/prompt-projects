@@ -9,7 +9,7 @@ body {
     background-image: url('https://images.unsplash.com/photo-1620812097331-ff636155488f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80');
     display: block;
     background-size:cover;
-    background-color: palegoldenrod;
+    background-color: #597578;
     margin: 0;  
 }
 
@@ -263,10 +263,7 @@ color:white;
      letter-spacing: 0.1ch;
      font-stretch: ultra-expanded;
      line-height: 1.85ch;
-     font-size: 1.2rem;
-    
-    
-
+     font-size: 1.2rem; 
 }
 
 

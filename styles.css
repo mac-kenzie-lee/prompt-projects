@@ -8,10 +8,7 @@ body {
     overflow-wrap: break-word;
 
     padding: 0;  
-    display: flex;
-    flex-direction: column;
-    justify-content: center;    
-    
+
     width: 100%;
     height: 100%;
     background-image: url('https://images.unsplash.com/photo-1620812097331-ff636155488f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80');
@@ -86,7 +83,6 @@ color:white;
     box-shadow: 0px 12px 40px black;
 
 }
-
 
 .calculator-body {
     height: 600px; /*adjusts the body of calc needs to be refactored for responsive*/
@@ -363,13 +359,9 @@ color:white;
         height: 600px; /*adjusts the body of calc needs to be refactored for responsive*/
         width: 300px; /*adjusts the body of calc needs to be refactored for responsive*/
     }
-    main {display:flex;
-        height: 100vh;
-    justify-content: center;
-flex-direction: column;}
+  
 
-.title {padding: 0;
-margin: 0;}
+
 
 
 }

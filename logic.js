@@ -104,6 +104,27 @@ function saveKeyOperatorVariable(e) {
     } 
 }
 
+function preventExtraZeroes(number) {
+ 
+    if (calculator.defaultDisplay === false) {
+        //this controls the trailing zeroes and only allows one zero at the beginning
+    if (number === '0') {
+        console.log(calculator.toDisplay)
+        console.log(number)
+        if (calculator.toDisplay.length === 1 && calculator.toDisplay === '0') {
+            return null;
+        }
+    }}
+}
+
+function checkForInitialDecimal(input) {
+    //This function allows a 0 before a decimal, but if there's no decimal, the zero is erased
+    if (calculator.toDisplay.length === 1 && calculator.toDisplay === '0') {
+        if (input !== ".") {
+            calculator.toDisplay = "";
+        }
+    }
+}
 
 //---functions for updating the calculator screen.
 
@@ -116,12 +137,17 @@ function updateDisplay(e) {
     //isolates the button and figures out what it represents in strng
     if(e.type === 'click') {
         //checks if the event was a click event, and finds the value the button represents and adds to display
+        checkForInitialDecimal(e.target.parentElement.children[0].innerText)
+        if (preventExtraZeroes(e.target.parentElement.children[0].innerText) !== null) {
         calculator.toDisplay += e.target.parentElement.children[0].innerText;
-        
+        }
     } else if (e.type === 'keydown') {
         //checks if event was a keydown event and adds the number from the key to the display
         //This is a string
+        checkForInitialDecimal(e.key);
+        if ((preventExtraZeroes(e.key)) !== null) {
         calculator.toDisplay += e.key; 
+        }
     }
     //Updates the screen to be the text the user inputted
     screenDisplay.textContent = calculator.toDisplay;

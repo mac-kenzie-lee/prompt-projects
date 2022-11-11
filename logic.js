@@ -68,11 +68,16 @@ function keyboardEventHandler(e) {
     e.preventDefault()
     if (numberKeys.indexOf(e.key) !== -1) {
 
+        //checks for a decimal point key for keyboard
         if (e.key === ".") {
+            // if theres no decimal it updates the screen
+            if (calculator.toDisplay.length === 0) {
+                updateDisplay(e)    
+            } else {
             if (screenDisplay.textContent.indexOf('.') === -1) {
             updateDisplay(e)}
-        }
-        else {
+        }}
+        else { //this is for all other digits not the decimal point
             updateDisplay(e)
         }
        
@@ -189,6 +194,7 @@ function masterClear() {
     enableOperatorButtons()
     //displays a message on the screen 
     screenDisplay.textContent = 'memory cleared'
+    //resets clear screen to be 0.
     setTimeout(clearDisplay, 1000)
         
     

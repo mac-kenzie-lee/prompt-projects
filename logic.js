@@ -20,7 +20,6 @@ const calculator = {};
 calculator.defaultDisplay = true;
 calculator.toDisplay = "";
 
-
 //event listeners ----------------------------------------------------
 clearButton.addEventListener('click', clearDisplay) 
 clearButton.addEventListener('dblclick', masterClear) 
@@ -29,7 +28,6 @@ for (let btn of numberButtonsArray) {
 }
 document.addEventListener('keydown', keyboardEventHandler)
 equalButton.addEventListener('click', findSolution)
-
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //functions ---------------------------------------------------------
@@ -49,13 +47,11 @@ function disableOperatorButtons() {
     }
 }
     
-
 function enableDecimalButton() {
     //adds an event listener to the decimal key
     deci.addEventListener('click', disableDecimalButton)
     calculator.deciUsed = false;
 }
-
 
 function disableDecimalButton(e){
     //checks to see if the decimal was used, and removes the ability to use twice
@@ -64,7 +60,6 @@ function disableDecimalButton(e){
         updateDisplay(e)
         deci.removeEventListener('click', disableDecimalButton)
     }
-
 }
 
 //Keyboard functions--------------------------------------
@@ -72,7 +67,15 @@ function disableDecimalButton(e){
 function keyboardEventHandler(e) {
     e.preventDefault()
     if (numberKeys.indexOf(e.key) !== -1) {
-        updateDisplay(e)
+
+        if (e.key === ".") {
+            if (screenDisplay.textContent.indexOf('.') === -1) {
+            updateDisplay(e)}
+        }
+        else {
+            updateDisplay(e)
+        }
+       
     }
     if (deleteKeys.indexOf(e.key) !== -1) {
         masterClear()
@@ -81,7 +84,6 @@ function keyboardEventHandler(e) {
         clearDisplay()
     } 
     
-
     for (let o of operatorKeys) {
         if (e.key === o) {
             saveOperatorToMemory(e)
@@ -175,6 +177,7 @@ function clearDisplay() {
 }
 
 function masterClear() {
+    clearDisplay()
     // delete calculator.expression
     //clear's residual data
     delete calculator.summation;
@@ -262,7 +265,6 @@ function getThePercent(){
         } else {
             calculator.num2 = (1 + (calculator.num2/100))
         }
-
         calculator.summation = operate(calculator.operator, calculator.num1, calculator.num2)
         screenDisplay.textContent = calculator.summation;
 

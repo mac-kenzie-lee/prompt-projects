@@ -177,7 +177,7 @@ function clearDisplay() {
 }
 
 function masterClear() {
-    clearDisplay()
+    
     // delete calculator.expression
     //clear's residual data
     delete calculator.summation;
@@ -189,7 +189,10 @@ function masterClear() {
     enableOperatorButtons()
     //displays a message on the screen 
     screenDisplay.textContent = 'memory cleared'
- }
+    setTimeout(clearDisplay, 1000)
+        
+    
+}
 
 
 //Calculation functions in variables--------------
